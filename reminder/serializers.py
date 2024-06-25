@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Person
+from .models import Person, Event
 
 
 class PersonSerailizers(serializers.ModelSerializer):
@@ -24,3 +24,9 @@ class PersonCreateUpdateSerailizers(serializers.ModelSerializer):
             'congrats_birth_message',
             'send_type',
         )
+
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'

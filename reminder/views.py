@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
 
 from account.models import Profile
-from .models import Person
+from .models import Person, Event
 from . import serializers
 
 
@@ -46,3 +46,15 @@ class PersonUpdateDeleteView(APIView):
         person = get_object_or_404(Person, id=person_id)
         person.delete()
         return Response(data={"message": "Deleted successfully"}, status=status.HTTP_200_OK)
+
+
+class EventView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        profile = get_object_or_404(Profile, user_rel=request.user)
+        event = Event.objects.filter(person_profile_rel=profile)
+        if event.exists():
+            serializer = serializers.EventSerializer(instance=event, many=True)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        return Response(data={"message": "Event doesn't exists"}, status=status.HTTP_404_NOT_FOUND)
