@@ -32,6 +32,8 @@ class PersonView(APIView):
 
 
 class PersonUpdateDeleteView(APIView):
+    permission_classes = (IsAuthenticated,)
+
     def put(self, request, person_id):
         person = get_object_or_404(Person, id=person_id)
         serializer = serializers.PersonCreateUpdateSerailizers(instance=person, data=request.data, partial=True)
