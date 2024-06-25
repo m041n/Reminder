@@ -23,9 +23,24 @@ class PersonView(APIView):
 
     def post(self, request):
         profile = get_object_or_404(Profile, user_rel=request.user)
-        serializer = serializers.PersonCreateSerailizers(data=request.data)
+        serializer = serializers.PersonCreateUpdateSerailizers(data=request.data)
         if serializer.is_valid():
             person = Person(person_profile_rel=profile, **serializer.validated_data)
             person.save()
             return Response(data={"message": "Create person sucsessfuly"}, status=status.HTTP_201_CREATED)
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PersonUpdateDeleteView(APIView):
+    def put(self, request, person_id):
+        person = get_object_or_404(Person, id=person_id)
+        serializer = serializers.PersonCreateUpdateSerailizers(instance=person, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data={"message": "Update person successfully"}, status=status.HTTP_200_OK)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, person_id):
+        person = get_object_or_404(Person, id=person_id)
+        person.delete()
+        return Response(data={"message": "Deleted successfully"}, status=status.HTTP_200_OK)

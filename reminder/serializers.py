@@ -9,7 +9,7 @@ class PersonSerailizers(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class PersonCreateSerailizers(serializers.ModelSerializer):
+class PersonCreateUpdateSerailizers(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = (
