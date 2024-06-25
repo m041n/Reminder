@@ -7,3 +7,20 @@ class PersonSerailizers(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = '__all__'
+
+
+class PersonCreateSerailizers(serializers.ModelSerializer):
+    class Meta:
+        model = Person
+        fields = (
+            'first_name',
+            'last_name',
+            'phone_number',
+            'birth_date',
+            'notification_time',
+            'message',
+            'send_message_time',
+            'congrats_birth',
+            'congrats_birth_message',
+            'send_type',
+        )
