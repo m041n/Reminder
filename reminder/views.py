@@ -63,8 +63,7 @@ class EventView(APIView):
         profile = get_object_or_404(Profile, user_rel=request.user)
         serializer = serializers.EventCreateUpdateSerializer(data=request.data)
         if serializer.is_valid():
-            persons = Person.objects.filter(id__in=serializer.validated_data["persons_rel"])
-            serializer.validated_data.pop("persons_rel")
+            persons = serializer.validated_data.pop("persons_rel")
             event = Event(person_profile_rel=profile, **serializer.validated_data)
             event.save()
             event.persons_rel.add(*persons)
