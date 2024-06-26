@@ -43,6 +43,6 @@ class Event(models.Model):
     user_rel = models.ForeignKey(Profile, on_delete=models.CASCADE, name='person_profile_rel')
     persons_rel = models.ManyToManyField(Person)
 
-    massage = models.TextField()
+    message = models.TextField()
     send_massage_time =models.DateTimeField()
     send_type = models.CharField(max_length=3, choices=SEND_TYPE, default="NO")

@@ -30,3 +30,16 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = '__all__'
+
+
+class EventCreateUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = (
+            'title',
+            'description',
+            'message',
+            'send_massage_time',
+            'send_type',
+            'persons_rel',
+        )
