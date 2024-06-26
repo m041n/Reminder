@@ -8,4 +8,5 @@ urlpatterns = [
     path('persons/<int:person_id>/', views.PersonUpdateDeleteView.as_view()),
 
     path('events/', views.EventView.as_view()),
+    path('events/<int:event_id>/', views.EventUpdateDeleteView.as_view()),
 ]

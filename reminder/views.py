@@ -69,3 +69,13 @@ class EventView(APIView):
             event.persons_rel.add(*persons)
             return Response(data={"message": "Create event sucsessfuly"}, status=status.HTTP_201_CREATED)
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class EventUpdateDeleteView(APIView):
+    def put(self, request, event_id):
+        event = get_object_or_404(Event, id=event_id)
+        serializer = serializers.EventCreateUpdateSerializer(instance=event, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(data={"message": "Update event sucsessfuly"}, status=status.HTTP_201_CREATED)
+        return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
