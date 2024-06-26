@@ -79,3 +79,8 @@ class EventUpdateDeleteView(APIView):
             serializer.save()
             return Response(data={"message": "Update event sucsessfuly"}, status=status.HTTP_201_CREATED)
         return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, event_id):
+        event = get_object_or_404(Event, id=event_id)
+        event.delete()
+        return Response(data={"message": "Deleted event sucsessfuly"}, status=status.HTTP_200_OK)
