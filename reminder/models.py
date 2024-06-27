@@ -14,6 +14,7 @@ class Person(models.Model):
 
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=200)
+    email = models.EmailField(null=True)
     phone_number = models.CharField(max_length=11, null=True)
     birth_date = models.DateField(null=True)
     notification_time = models.DateField(null=True)
@@ -44,5 +45,5 @@ class Event(models.Model):
     persons_rel = models.ManyToManyField(Person)
 
     message = models.TextField()
-    send_massage_time =models.DateTimeField()
+    send_massage_time =models.DateField()
     send_type = models.CharField(max_length=3, choices=SEND_TYPE, default="NO")
