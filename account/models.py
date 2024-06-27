@@ -83,7 +83,7 @@ class Profile(models.Model):
     national_id = models.CharField(max_length=10, unique=True)
     image = models.ImageField(upload_to='account/face_image/')
     birth_date = models.DateField()
-    token = models.CharField(max_length=255)
+    token = models.CharField(max_length=255, null=True)
 
     updated_at = models.DateField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)

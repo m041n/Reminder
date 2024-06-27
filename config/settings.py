@@ -151,10 +151,10 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_BEAT_SCHEDULE = {
     'send_congrats_task': {
         'task': 'reminder.tasks.send_congrats_task',
-        'schedule': crontab('*/1'),
+        'schedule': crontab(hour=6, minute=0),
     },
     'event_send_task': {
         'task': 'reminder.tasks.event_send_task',
-        'schedule': crontab('*/1'),
+        'schedule': crontab(hour=7, minute=0),
     },
 }
